@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <table class="container">
+        <thead>
+            <tr>
+                <td>STT</td>
+                <td>Name</td>
+                <td>Descrtion</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total Amount</td>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+            @{
+                if (ViewBag.Carts != null)
+                {
+                    var carts = ViewBag.Carts;
+                    var index = 0;
+                    foreach (var c in carts)
+                    {
+                    <tr>
+                        <td class="image text-center" data-title="No"><img src="https://via.placeholder.com/100x100" alt="#" /></td>
+                        <td class="product-des" data-title="Description">
+                            <p class="product-name"><a href="/Product/@c.Product.Id">@c.Product.Name</a></p>
+                            <p class="product-des">c.Product.Description</p>
+                        </td>
+                        <td class="price text-center" data-title="Price"><span>@c.Product.Price</span></td>
+                        <td class="qty" data-title="Qty">
+                            <div class="input-group" style="display:flex;align-items:center;justify-content:center;">
+                                <div class="button minus">
+                                    <button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[1]">
+                                        &minus;
+                                    </button>
+                                </div>
+                                <input type="text" name="quant[1]" class="input-number" data-min="1" data-max="100" data-productid="@c.Product.Id" value="@c.Quantity">
+                                <div class="button plus">
+                                    <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                                        &plus;
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="total-amount text-center" data-title="Total"><span>@((c.Product.Price * c.Quantity).ToString("N0")) đ</span></td>
+                        <td class="action text-center" data-title="Remove"><a href="/cart/delete?cartId=@ViewBag.CartId&productId=@c.Product.Id">Xoá</a></td>
+                    </tr>
+                    }
+                }
+            }
+    </table>
+
+    <form action="/order/payment" id="frmCreateOrder" method="post">
+        <input value="@ViewBag.Total" name="total"/>
+        <button type="submit">Payment</button>
+    </form>
+
+</section>

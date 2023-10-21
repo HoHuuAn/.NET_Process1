@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WebApplication1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApplication1.styles.css" asp-append-version="true" />
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        a:active {
+            color: black;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        li > a:hover {
+            text-decoration: underline;
+            color: red;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .footer-content .list-info p {
+            font-size: 14px;
+        }
+
+        .footer-title h4 {
+            font-size: 16px;
+        }
+
+        .list-ship li, .list-pay li {
+            width: calc(100%/4);
+            display: inline-flex;
+            padding: 2px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="p-3 bg-white ">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 font-weight-bold text-decoration-none" style="font-size:32px">
+                    DotnetShop
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 text-secondary"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                    <li><a href="#" class="nav-link px-2 text-white"></a></li>
+                </ul>
+
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                </form>
+                @{
+                    if (ViewData["Name"] != null)
+                    {
+                        <div class="text-end" style="display: flex; align-items: center; justify-content: center;">
+                            <a asp-controller="Cart" asp-action="Index" class="text-decoration-none text-black" style="margin-right: 5px; border:1px solid black; border-radius:4px; padding: 3px 12px">Cart</a>
+                            <div>Welcome, @ViewData["Name"]</div>
+                            <a asp-controller="Login" asp-action="Logout" style="margin-left:5px">Log out</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-end" >
+                            <a asp-controller="Login" asp-action="Index" class="text-decoration-none btn">Login</a>
+                            <a href="/Login/Register" class="text-decoration-none text-black btn">Register</a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
